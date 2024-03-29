@@ -26,10 +26,10 @@
 //! B : 0x00	C : 0x00	D : 0x00	E : 0x00	H : 0x00	L : 0x00 ...
 //! ```
 //!
-//! Includes a "cpmloader" which loads and executes basic CP/M programs:
+//! Includes a "cpmrun" example which loads and executes basic CP/M programs:
 //!
 //! ```text
-//! cargo run --release --example cpmloader -- bin/helloworld.bin
+//! cargo run --release --example cpmrun bin/helloworld.bin
 //! ```
 //!
 //! You can also check my [Altair 8800 / 88-SIO / teletype emulator](https://github.com/nicolasbauw/Altair8800).
