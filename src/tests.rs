@@ -1,4 +1,4 @@
-use crate::CPU;
+use crate::cpu::CPU;
 
 #[test]
 fn ldax_b() {
@@ -414,7 +414,6 @@ fn cma() {
     c.execute();
     assert_eq!(c.pc, 1);
     assert_eq!(0b00110011, c.reg.a);
-    
 }
 
 #[test]

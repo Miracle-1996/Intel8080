@@ -1,5 +1,5 @@
-use std::{ env, error::Error, process };
-use intel8080::*;
+use intel8080::cpu::CPU;
+use std::{env, error::Error, process};
 
 fn main() {
     if let Err(e) = load_execute() {
@@ -9,7 +9,7 @@ fn main() {
 }
 
 fn load_execute() -> Result<(), Box<dyn Error>> {
-    let  a: Vec<String> = env::args().collect();
+    let a: Vec<String> = env::args().collect();
     let mut c = CPU::new();
     c.debug.switch = true;
 
@@ -23,7 +23,9 @@ fn load_execute() -> Result<(), Box<dyn Error>> {
     loop {
         c.execute();
         println!("{}\n", c.debug.string);
-        if c.pc == 0x0000 { break }             //  if CP/M warm boot -> we exit
+        if c.pc == 0x0000 {
+            break;
+        } //  if CP/M warm boot -> we exit
     }
     Ok(())
 }
