@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.18.0
+
+- BREAKING Removed in last versions the experimental I/O system from 0.15.0 (you can see how IO is handled now in my Altair8800 or TRS-80 repos)
+- Moved CPU stuff to cpu.rs
+
 ### 0.15.0
 
 - BREAKING Reworked the I/O system which is now based on channels. The old IO system won't work any more.
