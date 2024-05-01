@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.19.0
+- Bus size can be customized
+
 ### 0.18.0
 
 - BREAKING Removed in last versions the experimental I/O system from 0.15.0 (you can see how IO is handled now in my Altair8800 or TRS-80 repos)
