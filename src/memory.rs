@@ -14,9 +14,9 @@ pub struct ROMSpace {
 
 impl Bus {
     #[doc(hidden)]
-    pub fn new() -> Bus {
+    pub fn new(size: u16) -> Bus {
         Bus {
-            address_space: vec![0; 65536],
+            address_space: vec![0; (size as usize) + 1],
             rom_space: None,
         }
     }
@@ -71,21 +71,21 @@ mod tests {
     use super::*;
     #[test]
     fn rw_byte() {
-        let mut b = Bus::new();
+        let mut b = Bus::new(0xFFFF);
         b.write_byte(0x0000, 0xFF);
         assert_eq!(b.read_byte(0x0000), 0xFF);
     }
 
     #[test]
     fn rw_word() {
-        let mut b = Bus::new();
+        let mut b = Bus::new(0xFFFF);
         b.write_word(0x0000, 0x1be3);
         assert_eq!(b.read_word(0x0000), 0x1be3);
     }
 
     #[test]
     fn rw_le_word() {
-        let mut b = Bus::new();
+        let mut b = Bus::new(0xFFFF);
         b.write_word(0x0000, 0x1be3);
         assert_eq!(b.read_le_word(0x0000), 0xe31b);
     }

@@ -3,7 +3,7 @@
 //! Example for a small loop:
 //! ```rust
 //! use intel8080::cpu::CPU;
-//! let mut c = CPU::new();
+//! let mut c = CPU::new(0xFFFF);
 //! c.pc = 0x0100;                      // sets pc to $100
 //! // Here we create a small machine code program for demo purpose.
 //! // Usually you will rather load an assembled code in memory (see below).
