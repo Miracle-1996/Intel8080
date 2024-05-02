@@ -1,7 +1,9 @@
 # Changelog
 
 ### 0.19.0
+
 - Bus size can be customized
+- Protection for out of bound reads or writes
 
 ### 0.18.0
 
