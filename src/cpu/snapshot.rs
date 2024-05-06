@@ -17,12 +17,10 @@ impl CPU {
         snapshot.push(self.flags.as_byte());
 
         // pc
-        snapshot.push(((self.pc & 0xFF00) >> 8) as u8);
-        snapshot.push((self.pc & 0x00FF) as u8);
+        snapshot.extend_from_slice(&self.pc.to_be_bytes());
 
         // sp
-        snapshot.push(((self.sp & 0xFF00) >> 8) as u8);
-        snapshot.push((self.sp & 0x00FF) as u8);
+        snapshot.extend_from_slice(&self.sp.to_be_bytes());
 
         // int
         snapshot.push((self.int.0) as u8);
