@@ -4,6 +4,8 @@ use crate::memory::Bus;
 use crate::register::Registers;
 use std::time::SystemTime;
 
+mod snapshot;
+
 const CYCLES: [u8; 256] = [
     4, 10, 7, 5, 5, 5, 7, 4, 4, 10, 7, 5, 5, 5, 7, 4, 4, 10, 7, 5, 5, 5, 7, 4, 4, 10, 7, 5, 5, 5,
     7, 4, 4, 10, 16, 5, 5, 5, 7, 4, 4, 10, 16, 5, 5, 5, 7, 4, 4, 10, 13, 5, 10, 10, 10, 4, 4, 10,
