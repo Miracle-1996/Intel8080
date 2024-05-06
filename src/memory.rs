@@ -7,9 +7,9 @@ pub struct Bus {
 }
 
 /// Start and end addresses of read-only (ROM) area.
-pub struct ROMSpace {
-    pub start: u16,
-    pub end: u16,
+struct ROMSpace {
+    start: u16,
+    end: u16,
 }
 
 impl Bus {
@@ -24,6 +24,19 @@ impl Bus {
     /// Sets a ROM space. Write operations will be ineffective in this address range.
     pub fn set_romspace(&mut self, start: u16, end: u16) {
         self.rom_space = Some(ROMSpace { start, end });
+    }
+
+    /// Gets ROM space start and end addresses
+    pub fn get_romspace(&self) -> (u16, u16) {
+        match &self.rom_space {
+            Some(r) => (r.start, r.end),
+            None => (0, 0),
+        }
+    }
+
+    /// Exports the whole address space content
+    pub fn export_address_space(&self) -> Vec<u8> {
+        self.address_space.clone()
     }
 
     /// Reads a byte from memory
