@@ -104,5 +104,8 @@ impl CPU {
             snapshot[0x1F],
         ]);
         self.slice_max_cycles = slice_max_cycles;
+
+        // Address space
+        self.bus.load_from_vec(snapshot[0x30..snapshot.len()].to_vec(), 0);
     }
 }

@@ -106,6 +106,10 @@ impl Bus {
         self.address_space[org as usize..(buf.len() + org as usize)].clone_from_slice(&buf[..]);
         Ok(())
     }
+
+    pub fn load_from_vec(&mut self, source: Vec<u8>, org: u16) {
+        self.address_space[org as usize..(source.len() + org as usize)].clone_from_slice(&&source[..]);
+    }
 }
 
 #[cfg(test)]
