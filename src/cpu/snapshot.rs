@@ -2,6 +2,9 @@ use crate::cpu::CPU;
 
 impl CPU {
     pub fn export_snapshot(&mut self) -> Vec<u8> {
+        // We stop the CPU while building the snapshot
+        self.halt = true;
+
         let mut snapshot = Vec::new();
 
         // Magic number
@@ -55,6 +58,7 @@ impl CPU {
         // RAM
         snapshot.extend_from_slice(self.bus.export_address_space().as_slice());
 
+        self.halt = false;
         snapshot
     }
 
