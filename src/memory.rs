@@ -1,4 +1,28 @@
-use std::{fs::File, io::prelude::*};
+use std::{error, fmt, fs::File, io::prelude::*};
+
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub enum SnapshotError {
+    InvalidHeader,
+    IOError,
+}
+
+impl fmt::Display for SnapshotError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.write_str("Snapshot error : ")?;
+        f.write_str(match self {
+            SnapshotError::InvalidHeader => "Invalid header",
+            SnapshotError::IOError => "I/O Error",
+        })
+    }
+}
+
+impl From<std::io::Error> for SnapshotError {
+    fn from(_e: std::io::Error) -> SnapshotError {
+        SnapshotError::IOError
+    }
+}
+
+impl error::Error for SnapshotError {}
 
 /// The Bus struct is hosting the 8080 memory map and the pending IO operations for outer handling.
 pub struct Bus {
@@ -107,8 +131,10 @@ impl Bus {
         Ok(())
     }
 
+    /// Loads binary data from Vec<u8> into memory at $0000 + offset
     pub fn load_from_vec(&mut self, source: Vec<u8>, org: u16) {
-        self.address_space[org as usize..(source.len() + org as usize)].clone_from_slice(&&source[..]);
+        self.address_space[org as usize..(source.len() + org as usize)]
+            .clone_from_slice(&&source[..]);
     }
 }
 
