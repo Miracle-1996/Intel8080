@@ -4,7 +4,7 @@
 
 - Bus size can be customized
 - Protection for out of bound reads or writes
-- CPU State snapshot
+- CPU snapshot export / import
 
 ### 0.18.0
 
