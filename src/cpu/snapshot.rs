@@ -2,9 +2,6 @@ use crate::cpu::CPU;
 
 impl CPU {
     pub fn export_snapshot(&mut self) -> Vec<u8> {
-        // We stop the CPU while building the snapshot
-        self.halt = true;
-
         let mut snapshot = Vec::new();
 
         // Magic number
@@ -58,7 +55,6 @@ impl CPU {
         // RAM
         snapshot.extend_from_slice(self.bus.export_address_space().as_slice());
 
-        self.halt = false;
         snapshot
     }
 
@@ -106,6 +102,7 @@ impl CPU {
         self.slice_max_cycles = slice_max_cycles;
 
         // Address space
-        self.bus.load_from_vec(snapshot[0x30..snapshot.len()].to_vec(), 0);
+        self.bus
+            .load_from_vec(snapshot[0x30..snapshot.len()].to_vec(), 0);
     }
 }
