@@ -1,6 +1,6 @@
 use crate::bit;
 use crate::flags::Flags;
-use crate::memory::Bus;
+use crate::bus::Bus;
 use crate::register::Registers;
 use std::time::SystemTime;
 

@@ -41,7 +41,7 @@ mod bit;
 pub mod cpu;
 mod dasm;
 mod flags;
-pub mod memory;
+pub mod bus;
 #[doc(hidden)]
 pub mod register;
 

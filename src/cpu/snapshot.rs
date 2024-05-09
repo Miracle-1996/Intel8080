@@ -1,4 +1,4 @@
-use crate::{cpu::CPU, memory::SnapshotError};
+use crate::{cpu::CPU, bus::SnapshotError};
 
 impl CPU {
     pub fn export_snapshot(&mut self) -> Vec<u8> {
