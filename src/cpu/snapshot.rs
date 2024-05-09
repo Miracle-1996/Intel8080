@@ -1,4 +1,4 @@
-use crate::cpu::CPU;
+use crate::{cpu::CPU, memory::SnapshotError};
 
 impl CPU {
     pub fn export_snapshot(&mut self) -> Vec<u8> {
@@ -58,7 +58,11 @@ impl CPU {
         snapshot
     }
 
-    pub fn import_snapshot(&mut self, snapshot: Vec<u8>) {
+    pub fn import_snapshot(&mut self, snapshot: Vec<u8>) -> Result<(), SnapshotError> {
+        if snapshot[0..=3] != [0x41, 0x4c, 0x54, 0x52] {
+            return Err(SnapshotError::InvalidHeader);
+        }
+
         // CPU registers
         self.reg.a = snapshot[0x08];
         self.reg.b = snapshot[0x09];
@@ -104,5 +108,7 @@ impl CPU {
         // Address space
         self.bus
             .load_from_vec(snapshot[0x30..snapshot.len()].to_vec(), 0);
+
+        Ok(())
     }
 }
