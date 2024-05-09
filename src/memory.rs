@@ -22,6 +22,12 @@ impl From<std::io::Error> for SnapshotError {
     }
 }
 
+impl From<SnapshotError> for std::io::Error {
+    fn from(e: SnapshotError) -> std::io::Error {
+        std::io::Error::new(std::io::ErrorKind::Other, e)
+    }
+}
+
 impl error::Error for SnapshotError {}
 
 /// The Bus struct is hosting the 8080 memory map and the pending IO operations for outer handling.
