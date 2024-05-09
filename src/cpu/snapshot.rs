@@ -107,7 +107,7 @@ impl CPU {
 
         // Address space
         self.bus
-            .load_from_vec(snapshot[0x30..snapshot.len()].to_vec(), 0);
+            .load_from_vec(snapshot[0x30..snapshot.len()].to_vec(), 0)?;
 
         Ok(())
     }

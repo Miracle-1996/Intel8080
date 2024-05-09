@@ -3,6 +3,7 @@ use std::{error, fmt, fs::File, io::prelude::*};
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum SnapshotError {
     InvalidHeader,
+    NonMatchingMemSize,
     IOError,
 }
 
@@ -12,6 +13,7 @@ impl fmt::Display for SnapshotError {
         f.write_str(match self {
             SnapshotError::InvalidHeader => "Invalid header",
             SnapshotError::IOError => "I/O Error",
+            SnapshotError::NonMatchingMemSize => "Memory size is not matching"
         })
     }
 }
@@ -138,9 +140,11 @@ impl Bus {
     }
 
     /// Loads binary data from Vec<u8> into memory at $0000 + offset
-    pub fn load_from_vec(&mut self, source: Vec<u8>, org: u16) {
+    pub fn load_from_vec(&mut self, source: Vec<u8>, org: u16) -> Result<(), SnapshotError> {
+        if source.len() != self.address_space.len() { return Err(SnapshotError::NonMatchingMemSize) }
         self.address_space[org as usize..(source.len() + org as usize)]
             .clone_from_slice(&&source[..]);
+        Ok(())
     }
 }
 
